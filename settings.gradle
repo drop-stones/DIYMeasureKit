@@ -1,0 +1,2 @@
+rootProject.name = "DIY Measure Kit"
+include ':app'
