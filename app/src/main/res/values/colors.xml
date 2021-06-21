@@ -14,7 +14,8 @@
     <color name="gray">#FF404040</color>
     <color name="light_gray">#FFB3B3B3</color>
 
+    <color name="toolbar">@color/dark</color>
     <color name="title">@color/white</color>
     <color name="button_background">@color/gray</color>
-    <color name="toolbar">@color/dark</color>
+    <color name="angle_text">@color/white</color>
 </resources>

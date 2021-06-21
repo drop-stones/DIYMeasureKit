@@ -22,6 +22,7 @@ class HorizontalAngleMeasure : AppCompatActivity(), SensorEventListener {
     var accuracy: Int = 0
 
     lateinit var angleView: TextView
+    lateinit var angleDrawView: AngleDrawView
 
     var angle: Float = 0.0F
 
@@ -31,6 +32,7 @@ class HorizontalAngleMeasure : AppCompatActivity(), SensorEventListener {
         setTitle(R.string.horizontal_angle_measure)
 
         angleView = findViewById(R.id.horizontal_angle)
+        angleDrawView = findViewById(R.id.angle_draw_view)
         printAngle()
 
         manager = getSystemService(SENSOR_SERVICE) as SensorManager
@@ -65,6 +67,7 @@ class HorizontalAngleMeasure : AppCompatActivity(), SensorEventListener {
         angle = (theta * 180 / PI).toFloat()
         Log.i(TAG, "gx=$gx, gy=$gy, gz=$gz, theta=$theta, angle=$angle")
 
+        angleDrawView.setTheta(theta)
         printAngle()
     }
 

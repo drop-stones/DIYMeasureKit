@@ -11,8 +11,18 @@
         android:id="@+id/horizontal_angle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/angle_text"
         android:textSize="@dimen/horizontal_angle_text_size"
+        android:translationZ="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <io.github.drop_stones.diymeasurekit.AngleDrawView
+        android:id="@+id/angle_draw_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
