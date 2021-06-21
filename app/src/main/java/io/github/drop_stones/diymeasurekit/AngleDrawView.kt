@@ -28,8 +28,8 @@ class AngleDrawView @JvmOverloads constructor (
         //paint.color = Color.rgb(0x40, 0x40, 0x40)
         paint.color = Color.rgb(0xB3, 0xB3, 0xB3)
 
-        val leftY: Float = (1 + tan(theta)) * (h / 2)
-        val rightY: Float = (1 - tan(theta)) * (h / 2)
+        val leftY: Float = h / 2 + tan(theta) * (w / 2)
+        val rightY: Float = h / 2 - tan(theta) * (w / 2)
 
         leftTriangle.reset()
         leftTriangle.fillType = Path.FillType.EVEN_ODD
