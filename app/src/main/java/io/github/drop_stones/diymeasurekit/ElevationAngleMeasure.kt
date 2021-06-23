@@ -18,7 +18,7 @@ class ElevationAngleMeasure : AppCompatActivity(), SensorEventListener {
     lateinit var manager: SensorManager
     lateinit var sensor: Sensor
     val type: Int = Sensor.TYPE_GRAVITY
-    val delay: Int = SensorManager.SENSOR_DELAY_NORMAL
+    val delay: Int = SensorManager.SENSOR_DELAY_FASTEST
     var accuracy: Int = 0
 
     lateinit var angleView: TextView

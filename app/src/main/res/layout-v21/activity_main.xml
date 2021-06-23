@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_gray"
     tools:context=".MainActivity">
-    
+
     <!--
     <Button
         android:id="@+id/curve_distance_measure"
