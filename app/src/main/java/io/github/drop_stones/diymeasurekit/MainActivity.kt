@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*
         val curveDistanceMeasure: Button = findViewById(R.id.curve_distance_measure)
         curveDistanceMeasure.setOnClickListener {
             val intent: Intent = Intent(this, CurveDistanceMeasure::class.java)
@@ -19,6 +20,13 @@ class MainActivity : AppCompatActivity() {
         val directDistanceButton: Button = findViewById(R.id.direct_distance_measure)
         directDistanceButton.setOnClickListener {
             val intent: Intent = Intent(this, DirectDistanceMeasure::class.java)
+            startActivity(intent)
+        }
+         */
+
+        val distanceMeasure: Button = findViewById(R.id.distance_measure)
+        distanceMeasure.setOnClickListener {
+            val intent: Intent = Intent(this, CurveDistanceMeasure::class.java)
             startActivity(intent)
         }
 

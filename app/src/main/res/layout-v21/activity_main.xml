@@ -7,6 +7,7 @@
     android:background="@color/dark_gray"
     tools:context=".MainActivity">
     
+    <!--
     <Button
         android:id="@+id/curve_distance_measure"
         android:layout_width="wrap_content"
@@ -43,6 +44,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/direct_distance_measure"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+    -->
+
+    <Button
+        android:id="@+id/distance_measure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/distance_measure"
+        android:textSize="@dimen/button_text_size"
+        android:backgroundTint="@color/button_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/elevation_angle_measure"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <Button
+        android:id="@+id/elevation_angle_measure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/elevation_angle_measure"
+        android:textSize="@dimen/button_text_size"
+        android:backgroundTint="@color/button_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/distance_measure"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_chainStyle="spread" />
 

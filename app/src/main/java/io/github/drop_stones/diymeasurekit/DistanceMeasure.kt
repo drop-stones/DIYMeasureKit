@@ -16,15 +16,11 @@ import kotlin.math.abs
 
 open class DistanceMeasure : AppCompatActivity(), SensorEventListener, Runnable {
     val TAG: String? = DistanceMeasure::class.simpleName
-    val DISTANCE_REFRESH_PERIOD_MS: Long = 20
-    val alpha: Double = 0.75
+    //val alpha: Double = 0.75
     val secToNano = 1000000000
 
     lateinit var manager: SensorManager
     lateinit var sensor: Sensor
-
-    val handler: Handler = Handler()
-    var timer: Timer = Timer()
 
     var interval: Double = 0.0
     var accuracy: Int = 0
@@ -38,7 +34,6 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener, Runnable 
     val thresholdZ = 0.01
     val stopAccelerationThreshold = 0.001
     val stopVelocityThreshold = 0.02
-    val beta: Double = 0.99
 
     lateinit var distanceView: TextView
     var distance: Double = 0.0
@@ -66,15 +61,6 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener, Runnable 
     var gx: Double = 0.0
     var gy: Double = 0.0
     var gz: Double = 0.0
-
-    // Remove noise
-    var stabilityCount: Int = 0
-    var stabilityX: FloatArray = FloatArray(3 * 60 * 200)
-    var stabilityY: FloatArray = FloatArray(3 * 60 * 200)
-    var stabilityZ: FloatArray = FloatArray(3 * 60 * 200)
-    var stabilityMaxX: Float = 0F
-    var stabilityMaxY: Float = 0F
-    var stabilityMaxZ: Float = 0F
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,9 +112,6 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener, Runnable 
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        //samplingStability(event)
-        //return
-
         if (prevTimeStamp == 0L) {
             prevTimeStamp = event.timestamp
         } else {
@@ -146,19 +129,6 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener, Runnable 
     }
 
     fun calculateXYZ(event: SensorEvent, interval: Double) {
-        //gx = alpha * gx + (1 - alpha) * event.values[0]
-        //gy = alpha * gy + (1 - alpha) * event.values[1]
-        //gz = alpha * gz + (1 - alpha) * event.values[2]
-        //ax = event.values[0] - gx
-        //ay = event.values[1] - gy
-        //az = event.values[2] - gz
-        //ax = if (abs(ax) > abs(thresholdX)) event.values[0].toDouble() else 0.0
-        //ay = if (abs(ay) > abs(thresholdY)) event.values[1].toDouble() else 0.0
-        //az = if (abs(az) > abs(thresholdZ)) event.values[2].toDouble() else 0.0
-        //ax = alpha * ax + (1 - alpha) * event.values[0]
-        //ay = alpha * ay + (1 - alpha) * event.values[1]
-        //az = alpha * az + (1 - alpha) * event.values[2]
-
         slideWindow(event, interval)
 
         dx = vx * interval + (ax * interval * interval) / 2
@@ -237,25 +207,5 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener, Runnable 
 
     fun printDistance() {
         distanceView.text = "%.2f m".format(distance)
-    }
-
-    fun samplingStability(event: SensorEvent) {
-        if (stabilityCount == stabilityX.size)
-            return
-        stabilityX[stabilityCount] = event.values[0]
-        stabilityY[stabilityCount] = event.values[1]
-        stabilityZ[stabilityCount] = event.values[2]
-        stabilityMaxX = if (abs(event.values[0]) > abs(stabilityMaxX)) event.values[0] else stabilityMaxX
-        stabilityMaxY = if (abs(event.values[1]) > abs(stabilityMaxY)) event.values[1] else stabilityMaxY
-        stabilityMaxZ = if (abs(event.values[2]) > abs(stabilityMaxZ)) event.values[2] else stabilityMaxZ
-        stabilityCount += 1
-        return
-    }
-
-    fun printStability() {
-        val aveX = stabilityX.average()
-        val aveY = stabilityY.average()
-        val aveZ = stabilityZ.average()
-        Log.i(TAG, "maxX=$stabilityMaxX, maxY=$stabilityMaxY, maxZ=$stabilityMaxZ, aveX=$aveX, aveY=$aveY, aveZ=$aveZ")
     }
 }
