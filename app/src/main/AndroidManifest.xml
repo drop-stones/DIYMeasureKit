@@ -30,7 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".HorizontalAngleMeasure"
+        <activity android:name=".ElevationAngleMeasure"
                   android:parentActivityName=".MainActivity"
                   android:screenOrientation="landscape">
             <meta-data

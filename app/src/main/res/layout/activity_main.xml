@@ -43,14 +43,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/curve_distance_measure"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal_angle_measure"
+        app:layout_constraintBottom_toTopOf="@+id/elevation_angle_measure"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <Button
-        android:id="@+id/horizontal_angle_measure"
+        android:id="@+id/elevation_angle_measure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/horizontal_angle_measure"
+        android:text="@string/elevation_angle_measure"
         android:textSize="@dimen/button_text_size"
         android:backgroundTint="@color/button_background"
         app:layout_constraintStart_toStartOf="parent"

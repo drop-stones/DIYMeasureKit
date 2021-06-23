@@ -12,8 +12,8 @@ import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.text.Typography.degree
 
-class HorizontalAngleMeasure : AppCompatActivity(), SensorEventListener {
-    val TAG: String? = HorizontalAngleMeasure::class.simpleName
+class ElevationAngleMeasure : AppCompatActivity(), SensorEventListener {
+    val TAG: String? = ElevationAngleMeasure::class.simpleName
 
     lateinit var manager: SensorManager
     lateinit var sensor: Sensor
@@ -28,10 +28,10 @@ class HorizontalAngleMeasure : AppCompatActivity(), SensorEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_horizontal_angle)
-        setTitle(R.string.horizontal_angle_measure)
+        setContentView(R.layout.activity_elevation_angle)
+        setTitle(R.string.elevation_angle_measure)
 
-        angleView = findViewById(R.id.horizontal_angle)
+        angleView = findViewById(R.id.elevation_angle)
         angleDrawView = findViewById(R.id.angle_draw_view)
         printAngle()
 

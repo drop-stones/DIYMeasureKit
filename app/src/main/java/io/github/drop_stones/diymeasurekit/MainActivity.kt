@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val horizontalAngleButton: Button = findViewById(R.id.horizontal_angle_measure)
-        horizontalAngleButton.setOnClickListener {
-            val intent: Intent = Intent(this, HorizontalAngleMeasure::class.java)
+        val elevationAngleButton: Button = findViewById(R.id.elevation_angle_measure)
+        elevationAngleButton.setOnClickListener {
+            val intent: Intent = Intent(this, ElevationAngleMeasure::class.java)
             startActivity(intent)
         }
     }
