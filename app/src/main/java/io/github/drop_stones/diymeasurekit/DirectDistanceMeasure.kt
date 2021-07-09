@@ -12,6 +12,6 @@ class DirectDistanceMeasure : DistanceMeasure() {
 
     override fun calculateDistance() {
         distance = sqrt(x*x + y*y + z*z)
-        printDistance()
+        //printDistance()
     }
 }

@@ -1,5 +1,6 @@
 package io.github.drop_stones.diymeasurekit
 
+import android.annotation.SuppressLint
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -13,18 +14,18 @@ import kotlin.math.atan2
 import kotlin.text.Typography.degree
 
 class ElevationAngleMeasure : AppCompatActivity(), SensorEventListener {
-    val TAG: String? = ElevationAngleMeasure::class.simpleName
+    private val TAG: String? = ElevationAngleMeasure::class.simpleName
 
-    lateinit var manager: SensorManager
-    lateinit var sensor: Sensor
-    val type: Int = Sensor.TYPE_GRAVITY
-    val delay: Int = SensorManager.SENSOR_DELAY_FASTEST
-    var accuracy: Int = 0
+    private lateinit var manager: SensorManager
+    private lateinit var sensor: Sensor
+    private val type: Int = Sensor.TYPE_GRAVITY
+    private val delay: Int = SensorManager.SENSOR_DELAY_FASTEST
+    private var accuracy: Int = 0
 
-    lateinit var angleView: TextView
-    lateinit var angleDrawView: AngleDrawView
+    private lateinit var angleView: TextView
+    private lateinit var angleDrawView: AngleDrawView
 
-    var angle: Float = 0.0F
+    private var angle: Float = 0.0F
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +37,7 @@ class ElevationAngleMeasure : AppCompatActivity(), SensorEventListener {
         printAngle()
 
         manager = getSystemService(SENSOR_SERVICE) as SensorManager
-        if (manager == null) {
-            return
-        }
         sensor = manager.getDefaultSensor(type)
-        if (sensor == null) {
-            return
-        }
     }
 
     override fun onResume() {
@@ -55,8 +50,9 @@ class ElevationAngleMeasure : AppCompatActivity(), SensorEventListener {
         manager.unregisterListener(this)
     }
 
+    @SuppressLint("SetTextI18n")
     fun printAngle() {
-        angleView.text = "%.2f".format(angle) + degree
+        angleView.text = getString(R.string.angle_format).format(angle) + degree
     }
 
     override fun onSensorChanged(event: SensorEvent) {

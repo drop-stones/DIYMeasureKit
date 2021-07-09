@@ -26,13 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         val distanceMeasure: Button = findViewById(R.id.distance_measure)
         distanceMeasure.setOnClickListener {
-            val intent: Intent = Intent(this, CurveDistanceMeasure::class.java)
+            val intent = Intent(this, CurveDistanceMeasure::class.java)
             startActivity(intent)
         }
 
         val elevationAngleButton: Button = findViewById(R.id.elevation_angle_measure)
         elevationAngleButton.setOnClickListener {
-            val intent: Intent = Intent(this, ElevationAngleMeasure::class.java)
+            val intent = Intent(this, ElevationAngleMeasure::class.java)
             startActivity(intent)
         }
     }
