@@ -33,12 +33,13 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener {
     private var prevTimeStamp: Long = 0
 
     //private val delay: Int = SensorManager.SENSOR_DELAY_NORMAL
-    private val delay: Int = SensorManager.SENSOR_DELAY_FASTEST
+    //private val delay: Int = SensorManager.SENSOR_DELAY_FASTEST
+    private val delay: Int = 5000  // per 5000 micro seconds event
     private val type: Int = Sensor.TYPE_LINEAR_ACCELERATION
     private val thresholdX = 0.01
     private val thresholdY = 0.008
     private val thresholdZ = 0.01
-    private val stopAccelerationThreshold = 0.001
+    private val stopAccelerationThreshold = 0.05
     //private val stopVelocityThreshold = 0.02
 
     private lateinit var distanceView: TextView
@@ -57,7 +58,7 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener {
     private var az: Double = 0.0
 
     // Slide Window
-    private val windowSize: Int = 4
+    private val windowSize: Int = 6
     private var windowIndex: Int = 0
     private var slideWindowX: DoubleArray = DoubleArray(windowSize)
     private var slideWindowY: DoubleArray = DoubleArray(windowSize)
@@ -144,6 +145,12 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener {
         Log.i(TAG, "vx=$vx, vy=$vy, vz=$vz")
     }
 
+    private fun updateVelocityWithoutThreshold() {
+        vx += ax * interval
+        vy += ay * interval
+        vz += az * interval
+    }
+
     private fun updateDistance() {
         dx = vx * interval + (ax * interval * interval) / 2
         dy = vy * interval + (ay * interval * interval) / 2
@@ -166,19 +173,34 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener {
     }
 
     private fun slideWindow(event: SensorEvent) {
-        val filteredX = when {
-            event.values[0] > thresholdX   -> event.values[0] - thresholdX / 2
-            event.values[0] < - thresholdX -> event.values[0] + thresholdX / 2
+        //val filteredX = when {
+        //    event.values[0] > thresholdX   -> event.values[0] - thresholdX / 2
+        //    event.values[0] < - thresholdX -> event.values[0] + thresholdX / 2
+        //    else -> 0.0
+        //}
+        //val filteredY = when {
+        //    event.values[1] > thresholdY   -> event.values[1] - thresholdY / 2
+        //    event.values[1] < - thresholdY -> event.values[1] + thresholdY / 2
+        //    else -> 0.0
+        //}
+        //val filteredZ = when {
+        //    event.values[2] > thresholdZ   -> event.values[2] - thresholdZ / 2
+        //    event.values[2] < - thresholdZ -> event.values[2] + thresholdZ / 2
+        //    else -> 0.0
+        //}
+        val filteredX: Double = when {
+            event.values[0] > thresholdX   -> event.values[0].toDouble()
+            event.values[0] < - thresholdX -> event.values[0].toDouble()
             else -> 0.0
         }
         val filteredY = when {
-            event.values[1] > thresholdY   -> event.values[1] - thresholdY / 2
-            event.values[1] < - thresholdY -> event.values[1] + thresholdY / 2
+            event.values[1] > thresholdY   -> event.values[1].toDouble()
+            event.values[1] < - thresholdY -> event.values[1].toDouble()
             else -> 0.0
         }
         val filteredZ = when {
-            event.values[2] > thresholdZ   -> event.values[2] - thresholdZ / 2
-            event.values[2] < - thresholdZ -> event.values[2] + thresholdZ / 2
+            event.values[2] > thresholdZ   -> event.values[2].toDouble()
+            event.values[2] < - thresholdZ -> event.values[2].toDouble()
             else -> 0.0
         }
 
@@ -192,9 +214,10 @@ open class DistanceMeasure : AppCompatActivity(), SensorEventListener {
     }
 
     private fun calculateRemainingSlideWindow() {
-        for (i in 0 until windowSize) {
+        for (i in 0..windowSize) {
+        //for (i in 0 until windowSize) {
             updateAcceleration()
-            updateVelocity()
+            updateVelocityWithoutThreshold()
             updateDistance()
             calculateDistance()
 

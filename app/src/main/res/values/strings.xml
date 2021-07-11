@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DIY Measure Kit</string>
     <string name="direct_distance_measure">Direct Distance Measure</string>
-    <string name="curve_distance_measure">Curve Distance Measure</string>
+    <string name="curve_distance_measure">Distance Measure</string>
     <string name="distance_measure">Distance Measure</string>
     <string name="elevation_angle_measure">Elevation Angle Measure</string>
     <string name="home">Home</string>
